@@ -1,0 +1,10 @@
+<h2>Find Friends</h2>
+<% @users.each do |user| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title"><%= user.email %></h5>
+      <%= link_to "View Profile", user_path(user), class: "btn btn-info" %>
+      <%= link_to "Add Friend", friendships_path(friend_id: user.id), method: :post, class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

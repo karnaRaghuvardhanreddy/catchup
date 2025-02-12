@@ -1,0 +1,7 @@
+<% if current_user.friends.include?(@user) %>
+  <button class="btn btn-success disabled">Friends</button>
+<% elsif current_user.pending_sent_requests.exists?(friend_id: @user.id) %>
+  <button class="btn btn-secondary disabled">Request Sent</button>
+<% else %>
+  <%= button_to "Add Friend", friendships_path(user_id: @user.id), method: :post, class: "btn btn-primary" %>
+<% end %>

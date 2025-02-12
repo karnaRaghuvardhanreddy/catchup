@@ -1,0 +1,8 @@
+<h2>New Thought</h2>
+<%= form_with(model: @thought, url: thoughts_path, local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :content, "Your Thought" %>
+    <%= form.text_area :content, class: "form-control", rows: 3 %>
+  </div>
+  <%= form.submit "Post", class: "btn btn-primary" %>
+<% end %>

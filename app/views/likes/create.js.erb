@@ -1,0 +1,4 @@
+document.getElementById("like-buttons-<%= @thought.id %>").innerHTML = 
+  `<a class="btn btn-danger btn-sm me-2" data-remote="true" rel="nofollow" data-method="delete" href="<%= thought_like_path(@thought, @thought.likes.find_by(user: current_user)) %>">Unlike</a>`;
+
+document.getElementById("like-count-<%= @thought.id %>").innerText = "<%= @thought.likes.count %> Likes";

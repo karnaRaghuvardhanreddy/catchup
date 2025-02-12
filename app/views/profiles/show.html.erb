@@ -1,0 +1,14 @@
+<h2>My Account</h2>
+<p>Email: <%= current_user.email %></p>
+<p>Friends: <%= current_user.friends.count %></p>
+<p>Posts: <%= current_user.thoughts.count %></p>
+
+<h3>My Thoughts</h3>
+<% current_user.thoughts.each do |thought| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <p class="card-text"><%= thought.content %></p>
+      <%= button_to "Delete", thought_path(thought), method: :delete, class: "btn btn-danger btn-sm" %>
+    </div>
+  </div>
+<% end %>

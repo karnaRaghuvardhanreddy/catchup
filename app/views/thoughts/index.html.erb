@@ -1,0 +1,26 @@
+<h2>Home</h2>
+<% if user_signed_in? %>
+  <div class="d-flex justify-content-end mb-3">
+    <%= link_to "Create Thought", new_thought_path, class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<% @thoughts.each do |thought| %>
+  <div class="card mb-3" id="thought-<%= thought.id %>">
+    <div class="card-body">
+      <h5 class="card-title"><%= thought.user.email %></h5>
+      <p class="card-text"><%= thought.content %></p>
+      <div class="d-flex align-items-center">
+        <div id="like-buttons-<%= thought.id %>">
+          <% like = thought.likes.find_by(user: current_user) %>
+          <% if like %>
+            <%= link_to "Unlike", thought_like_path(thought, like), method: :delete, remote: true, class: "btn btn-danger btn-sm me-2" %>
+          <% else %>
+            <%= button_to "Like", thought_likes_path(thought), method: :post, class: "btn btn-primary btn-sm me-2" %>
+          <% end %>
+        </div>
+        <span id="like-count-<%= thought.id %>"><%= thought.likes.count %> Likes</span>
+      </div>
+    </div>
+  </div>
+<% end %>

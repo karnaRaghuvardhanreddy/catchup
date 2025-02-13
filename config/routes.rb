@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :thoughts, only: [:index, :new, :create, :destroy] do
     resources :likes, only: [:create, :destroy]
   end
-  resources :friendships, only: [:index, :create, :update, :destroy]
+  resources :friendships, only: [:index, :create, :update,:destroy]
   resource :profile, only: [:show, :edit, :update]
   resources :users, only: [:index, :show]
 end

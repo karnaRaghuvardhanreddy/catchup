@@ -1,8 +1,11 @@
 import "@hotwired/turbo-rails";
 import "controllers";
+import Rails from "@rails/ujs";
+Rails.start();
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll(".add-friend-btn").forEach((button) => {
-    button.addEventListener("click", function () {
+  document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("add-friend-btn")) {
+      const button = event.target;
       const userId = button.dataset.userId;
 
       button.setAttribute("disabled", "disabled"); // Disable immediately
@@ -13,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
           "Content-Type": "application/json",
           "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
         },
-        body: JSON.stringify({ user_id: userId }),
+        body: JSON.stringify({ user_id: userId }), // Corrected body
       })
         .then((response) => response.json())
         .then((data) => {
@@ -22,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             button.classList.remove("btn-primary");
             button.classList.add("btn-secondary", "disabled");
           } else {
-            alert("Failed to send request: " + data.errors.join(", ")); // Show errors
+            alert("Failed to send request: " + data.message); // Show errors
             button.removeAttribute("disabled"); // Re-enable on error
           }
         })
@@ -31,6 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
           alert("An unexpected error occurred.");
           button.removeAttribute("disabled"); // Re-enable on error
         });
-    });
+    }
   });
 });
